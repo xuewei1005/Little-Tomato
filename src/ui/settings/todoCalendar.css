@@ -1,0 +1,33 @@
+.todo-calendar {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  background: var(--paper-strong);
+  color: var(--ink);
+}
+
+.todo-calendar-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; }
+.todo-calendar-navigation { display: flex; align-items: center; gap: 4px; margin: 10px 0; }
+.todo-calendar-navigation > button { flex: 0 0 28px; border: 0; border-radius: 7px; padding: 6px 0; background: var(--paper-muted); color: var(--ink); cursor: pointer; }
+.todo-calendar-period { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; }
+.todo-calendar-period input, .todo-calendar-period select { min-width: 0; width: auto; border: 1px solid var(--line); border-radius: 6px; padding: 5px 2px; background: var(--paper-strong); color: var(--ink); font-size: 12px; }
+.todo-calendar-period input { width: 62px; }
+.todo-calendar-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; text-align: center; }
+.todo-calendar-week [role="columnheader"] { padding: 5px 0; font-size: 11px; color: var(--ink-soft); }
+.todo-calendar-day { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 100%; min-height: 42px; margin: 1px 0; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--ink); cursor: pointer; font-size: 12px; }
+.todo-calendar-day small { color: var(--ink-soft); font-size: 10px; }
+.todo-calendar-day:hover { background: var(--paper-muted); }
+.todo-calendar-day[aria-pressed="true"] { background: var(--tomato-pale); border-color: var(--tomato); font-weight: 750; }
+.todo-calendar button:focus-visible, .todo-calendar input:focus-visible, .todo-calendar select:focus-visible { outline: 2px solid var(--lavender); outline-offset: 2px; }
+.todo-calendar button:disabled { opacity: .4; cursor: default; }
+.todo-calendar-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.todo-date-preview, .todo-date-hint { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.todo-date-error { margin: 0; color: var(--tomato-dark); font-size: 12px; }
+
+@media (max-width: 400px) {
+  .todo-calendar { padding: 6px; }
+  .todo-calendar-navigation { gap: 2px; }
+  .todo-calendar-navigation > button { flex-basis: 22px; }
+  .todo-calendar-period { gap: 2px; }
+}

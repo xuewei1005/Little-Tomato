@@ -1,0 +1,36 @@
+# This helper is the ONLY elevated process. Expected bytes are fixed at build
+# time; there is deliberately no caller-selectable certificate or store.
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
+$log = Join-Path $PSScriptRoot 'trust-certificate.log'
+try {
+  $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = New-Object Security.Principal.WindowsPrincipal($identity)
+  if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    throw 'Certificate trust requires administrator approval.'
+  }
+  $certPath = Join-Path $PSScriptRoot 'publisher.cer'
+  if ((Get-FileHash -LiteralPath $certPath -Algorithm SHA256).Hash -ne '@@CERT_SHA256@@') {
+    throw 'Bundled certificate SHA256 mismatch. Nothing was imported.'
+  }
+  $certificate = New-Object Security.Cryptography.X509Certificates.X509Certificate2($certPath)
+  if ($certificate.Thumbprint -ne '@@CERT_THUMBPRINT@@' -or $certificate.Subject -ne 'CN=XiaoFanQie' -or $certificate.HasPrivateKey) {
+    throw 'Unexpected signing certificate. Nothing was imported.'
+  }
+  if ($certificate.NotBefore -gt (Get-Date) -or $certificate.NotAfter -le (Get-Date)) {
+    throw 'Bundled certificate is not currently valid.'
+  }
+  $storePath = 'Cert:\LocalMachine\TrustedPeople\@@CERT_THUMBPRINT@@'
+  if (-not (Test-Path -LiteralPath $storePath)) {
+    Import-Certificate -FilePath $certPath -CertStoreLocation 'Cert:\LocalMachine\TrustedPeople' -ErrorAction Stop | Out-Null
+  }
+  $trusted = Get-Item -LiteralPath $storePath -ErrorAction Stop
+  if ([Convert]::ToBase64String($trusted.RawData) -ne [Convert]::ToBase64String($certificate.RawData)) {
+    throw 'TrustedPeople did not contain the exact bundled certificate.'
+  }
+  "$(Get-Date -Format o) Trusted exact bundled public certificate: $($certificate.Thumbprint)" | Set-Content -LiteralPath $log -Encoding UTF8
+  exit 0
+} catch {
+  $_ | Out-String | Set-Content -LiteralPath $log -Encoding UTF8
+  exit 1
+}

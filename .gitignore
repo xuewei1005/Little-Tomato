@@ -1,0 +1,40 @@
+# Dependencies and local build output
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+outputs/
+work/
+
+# TypeScript and tooling caches
+*.tsbuildinfo
+.vite/
+.vitest/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.token
+*.secret
+credentials.json
+token.json
+
+# Logs and local data
+*.log
+*.local
+*.csv
+*.sqlite
+*.sqlite3

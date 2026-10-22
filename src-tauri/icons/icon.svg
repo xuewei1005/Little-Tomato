@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="tomato" cx="32%" cy="24%" r="82%">
+      <stop offset="0" stop-color="#ffb58e"/>
+      <stop offset=".5" stop-color="#f4775d"/>
+      <stop offset="1" stop-color="#d34f43"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#a5dfa0"/>
+      <stop offset="1" stop-color="#3a936d"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="56" fill="#fff5ed"/>
+  <path d="M128 48c-25-27-58-18-57 7 1 18 20 24 40 17-4 21 3 28 17 27 14 1 21-6 17-27 20 7 39 1 40-17 1-25-32-34-57-7Z" fill="url(#leaf)"/>
+  <path d="M128 51C79 46 49 75 48 132c-1 57 29 87 80 87s81-30 80-87c-1-57-31-86-80-81Z" fill="url(#tomato)"/>
+  <ellipse cx="94" cy="94" rx="15" ry="10" fill="#fff" opacity=".28"/>
+  <ellipse cx="98" cy="137" rx="8" ry="16" fill="#4f332d"/>
+  <ellipse cx="158" cy="137" rx="8" ry="16" fill="#4f332d"/>
+  <circle cx="95" cy="132" r="3" fill="#fff"/><circle cx="155" cy="132" r="3" fill="#fff"/>
+  <path d="M116 164c7 8 17 8 24 0" fill="none" stroke="#8c423b" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="76" cy="162" rx="17" ry="8" fill="#ff9b9d" opacity=".42"/>
+  <ellipse cx="180" cy="162" rx="17" ry="8" fill="#ff9b9d" opacity=".42"/>
+</svg>

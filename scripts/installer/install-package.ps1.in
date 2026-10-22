@@ -1,0 +1,122 @@
+param([switch]$ValidateOnly, [switch]$SilentUi)
+
+$ErrorActionPreference = 'Stop'
+Set-StrictMode -Version Latest
+$packagePath = Join-Path $PSScriptRoot 'payload.msix'
+$certPath = Join-Path $PSScriptRoot 'publisher.cer'
+$helperPath = Join-Path $PSScriptRoot 'trust-certificate.ps1'
+$logDirectory = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'XiaoFanQie\Installer\Logs'
+New-Item -ItemType Directory -Path $logDirectory -Force | Out-Null
+$log = Join-Path $logDirectory (('install-{0}-{1}.log' -f (Get-Date -Format 'yyyyMMdd-HHmmss'), [Guid]::NewGuid().ToString('N')))
+function Write-InstallLog([string]$Message) {
+  Add-Content -LiteralPath $log -Value "$(Get-Date -Format o) $Message" -Encoding UTF8
+}
+function Assert-Hash([string]$Path, [string]$Expected) {
+  if ((Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash -ne $Expected) {
+    throw "Bundled payload validation failed: $([IO.Path]::GetFileName($Path))"
+  }
+}
+function Assert-OriginalUser {
+  $current = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = New-Object Security.Principal.WindowsPrincipal($current)
+  # RequestExecutionLevel=user prevents automatic elevation. If someone used
+  # 'Run as administrator' (including other credentials), fail safely rather
+  # than silently installing to that administrator's profile.
+  if ($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -or $current.IsSystem) {
+    throw '请关闭此窗口，使用原登录用户直接双击安装器。不要选择“以管理员身份运行”；安装器会在信任证书时单独请求管理员授权。'
+  }
+  if ($current.User.Value -ne $script:originalSid) { throw '安装用户发生变化，已停止部署。' }
+}
+
+try {
+  $script:originalSid = [Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+  Write-InstallLog "Installer started. User=$script:originalSid; Version=@@PACKAGE_VERSION@@"
+  Assert-Hash $packagePath '@@PACKAGE_SHA256@@'
+  Assert-Hash $certPath '@@CERT_SHA256@@'
+  Assert-Hash $helperPath '@@HELPER_SHA256@@'
+  $certificate = New-Object Security.Cryptography.X509Certificates.X509Certificate2($certPath)
+  if ($certificate.Thumbprint -ne '@@CERT_THUMBPRINT@@' -or $certificate.Subject -ne 'CN=XiaoFanQie') {
+    throw '安装证书与应用发布者不匹配。'
+  }
+  # Read-only integration check used by the build: never trust or deploy here.
+  if ($ValidateOnly) {
+    Write-InstallLog 'Bundled hashes and signing certificate validated; no trust/deployment changes.'
+    exit 0
+  }
+  Assert-OriginalUser
+  $trustPath = 'Cert:\LocalMachine\TrustedPeople\@@CERT_THUMBPRINT@@'
+  if (-not (Test-Path -LiteralPath $trustPath)) {
+    Write-InstallLog 'Requesting elevation for certificate trust only.'
+    $powershell = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    $helperArgs = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "{0}"' -f $helperPath
+    try {
+      $helper = Start-Process -FilePath $powershell -ArgumentList $helperArgs -Verb RunAs -WindowStyle Hidden -Wait -PassThru
+    } catch {
+      throw "证书授权被取消或无法启动管理员助手。$($_.Exception.Message)"
+    }
+    $helperLog = Join-Path $PSScriptRoot 'trust-certificate.log'
+    if (Test-Path -LiteralPath $helperLog) { Write-InstallLog ([IO.File]::ReadAllText($helperLog)) }
+    if ($helper.ExitCode -ne 0) { throw "证书信任失败（退出码 $($helper.ExitCode)）。" }
+  } else {
+    Write-InstallLog 'Exact certificate is already trusted; elevation is unnecessary.'
+  }
+  $trusted = Get-Item -LiteralPath $trustPath -ErrorAction Stop
+  if ([Convert]::ToBase64String($trusted.RawData) -ne [Convert]::ToBase64String($certificate.RawData)) {
+    throw '证书存储中的证书与安装器内置证书不同。'
+  }
+  Assert-OriginalUser
+  Assert-Hash $packagePath '@@PACKAGE_SHA256@@'
+  Write-InstallLog "Deploying MSIX for original user $script:originalSid."
+  $installed = @(Get-AppxPackage -Name 'com.xiaofanqie.desktop' -ErrorAction Stop | Where-Object { $_.Publisher -eq 'CN=XiaoFanQie' })
+  if ($installed | Where-Object { [version]$_.Version -gt [version]'@@PACKAGE_VERSION@@' }) {
+    throw '此用户已安装更新版本，请使用最新安装器；已保留现有应用和数据。'
+  }
+  if (-not ($installed | Where-Object { [version]$_.Version -eq [version]'@@PACKAGE_VERSION@@' -and $_.Status -eq 'Ok' })) {
+    Add-AppxPackage -Path $packagePath -ForceApplicationShutdown -ErrorAction Stop -Verbose 4>&1 | ForEach-Object { Write-InstallLog "$_" }
+  } else {
+    Write-InstallLog 'Same version already installed and healthy; preserving it.'
+  }
+  $package = Get-AppxPackage -Name 'com.xiaofanqie.desktop' -ErrorAction Stop | Where-Object {
+    $_.Publisher -eq 'CN=XiaoFanQie' -and [version]$_.Version -eq [version]'@@PACKAGE_VERSION@@' -and $_.Status -eq 'Ok'
+  } | Select-Object -First 1
+  if (-not $package) { throw '当前用户的应用包注册验证失败。' }
+  $aumid = $package.PackageFamilyName + '!App'
+  Write-InstallLog "Verified current-user package. AUMID=$aumid"
+  # Native MSIX registration creates the Start menu entry. Additional links
+  # activate the same packaged application identity.
+  $shell = New-Object -ComObject WScript.Shell
+  $shortcutDirectories = @([Environment]::GetFolderPath('DesktopDirectory'), [Environment]::GetFolderPath('Programs'))
+  foreach ($directory in $shortcutDirectories) {
+    if (-not $directory) { continue }
+    try {
+      New-Item -ItemType Directory -Path $directory -Force | Out-Null
+      $shortcut = $shell.CreateShortcut((Join-Path $directory '小番茄.lnk'))
+      $shortcut.TargetPath = Join-Path $env:SystemRoot 'explorer.exe'
+      $shortcut.Arguments = 'shell:AppsFolder\' + $aumid
+      $shortcut.Description = '小番茄桌面宠物与专注助手'
+      $shortcut.IconLocation = (Join-Path $package.InstallLocation 'Assets\AppIcon.ico') + ',0'
+      $shortcut.Save()
+    } catch {
+      # The installed Start menu entry is still usable if a redirected desktop
+      # is unavailable. A shortcut failure must not conceal successful deployment.
+      Write-InstallLog "Shortcut warning: $($_.Exception.Message)"
+    }
+  }
+  Write-InstallLog 'Installation complete.'
+  if (-not $SilentUi) {
+    Add-Type -AssemblyName System.Windows.Forms
+    [Windows.Forms.MessageBox]::Show("小番茄安装完成，可从桌面或开始菜单打开。`n`n安装日志：$log", '小番茄安装', 'OK', 'Information') | Out-Null
+  }
+  exit 0
+} catch {
+  Write-InstallLog ($_ | Format-List * -Force | Out-String)
+  if ($ValidateOnly) {
+    Write-Error "Payload validation failed: $($_.Exception.Message). Log: $log" -ErrorAction Continue
+    exit 1
+  }
+  if (-not $SilentUi) {
+    Add-Type -AssemblyName System.Windows.Forms
+    [Windows.Forms.MessageBox]::Show("安装未完成：$($_.Exception.Message)`n`n日志：$log", '小番茄安装', 'OK', 'Error') | Out-Null
+  }
+  exit 1
+}
