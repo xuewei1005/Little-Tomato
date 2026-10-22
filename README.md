@@ -9,13 +9,13 @@
 
 [下载 Windows 便携版](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) · [完整使用说明](./docs/guide.md) · [English guide](./docs/guide.md#english)
 
-![小番茄功能总览](./docs/images/feature-map.svg)
+![小番茄功能总览](./docs/images/feature-map.png)
 
 ## 这是什么？
 
 小番茄是一款可以陪在 Windows 桌面上的专注宠物。它把 Todo、番茄钟、起身提醒和轻量的生活 tips 放在一个安静的小窗口里：你忙的时候，它不会一直打扰；需要休息或任务到点时，它会用动作、表情和简短提示提醒你。
 
-![小番茄使用流程](./docs/images/usage-flow.svg)
+![小番茄使用流程](./docs/images/usage-flow.png)
 
 ## 功能一览
 
