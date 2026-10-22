@@ -29,9 +29,9 @@
   </g>
   <text x="292" y="286" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">01 · COMPANION</text>
   <text x="292" y="324" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">桌面宠物</text>
-  <text x="292" y="362" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">透明悬浮，随手拖到舒服的位置</text>
-  <text x="292" y="394" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">点击、右键和互动都会有动作反馈</text>
-  <text x="292" y="430" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">显示 / 隐藏 · 动作 · 情绪</text>
+  <text x="292" y="360" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">透明悬浮，拖到舒适位置</text>
+  <text x="292" y="390" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">点击、右键都有反馈</text>
+  <text x="292" y="426" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">显示 / 隐藏 · 动作 · 情绪</text>
 
   <!-- Timer card -->
   <g transform="translate(652 276)">
@@ -42,9 +42,9 @@
   </g>
   <text x="832" y="286" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">02 · FOCUS</text>
   <text x="832" y="324" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">番茄钟</text>
-  <text x="832" y="362" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">宠物拿出倒计时牌，显示剩余时间</text>
-  <text x="832" y="394" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">牌子上可暂停或继续，结束会撒花</text>
-  <text x="832" y="430" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">专注 · 休息 · 起身确认</text>
+  <text x="832" y="360" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">宠物会拿出倒计时牌</text>
+  <text x="832" y="390" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">暂停 / 继续，结束撒花</text>
+  <text x="832" y="426" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">专注 · 休息 · 起身确认</text>
 
   <!-- Todo card -->
   <g transform="translate(112 552)">
@@ -57,9 +57,9 @@
   </g>
   <text x="292" y="562" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">03 · PLAN</text>
   <text x="292" y="600" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">Todo 任务</text>
-  <text x="292" y="638" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">待做 / 已完成，重要任务一眼可见</text>
-  <text x="292" y="670" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">分组、星标、日期和倒数都放在一起</text>
-  <text x="292" y="706" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">右键编辑 · 分组 · 直接删除</text>
+  <text x="292" y="636" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">待做 / 已完成，重要任务</text>
+  <text x="292" y="666" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">分组、星标、日期、倒数</text>
+  <text x="292" y="702" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">右键编辑 · 分组 · 删除</text>
 
   <!-- Reminder card -->
   <g transform="translate(652 552)">
@@ -69,7 +69,7 @@
   </g>
   <text x="832" y="562" fill="#62d09b" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">04 · CARE</text>
   <text x="832" y="600" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">温和提醒</text>
-  <text x="832" y="638" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">tips 覆盖健康、心理与工作效率</text>
-  <text x="832" y="670" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">短句、动作和情绪会随状态变化</text>
-  <text x="832" y="706" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">本地优先 · 多语言 · 不读微信消息</text>
+  <text x="832" y="636" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">健康、心理、效率 tips</text>
+  <text x="832" y="666" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">短句和动作随状态变化</text>
+  <text x="832" y="702" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">本地优先 · 多语言</text>
 </svg>
