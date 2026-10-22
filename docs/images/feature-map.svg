@@ -1,24 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
   <title id="title">小番茄功能总览</title>
-  <desc id="desc">桌面宠物、番茄钟、Todo、提醒和多语言功能总览图</desc>
+  <desc id="desc">桌面宠物、番茄钟、Todo 和温和提醒的功能总览</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17151a"/><stop offset="1" stop-color="#2b2431"/></linearGradient>
-    <linearGradient id="tomato" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb77f"/><stop offset="1" stop-color="#f26f5a"/></linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".28"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17151a"/><stop offset="1" stop-color="#2d2433"/></linearGradient>
+    <linearGradient id="tomato" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffbd87"/><stop offset="1" stop-color="#ef705c"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity=".28"/></filter>
   </defs>
-  <rect width="1200" height="680" rx="34" fill="url(#bg)"/>
-  <circle cx="1080" cy="86" r="180" fill="#6b55d9" opacity=".12"/><circle cx="120" cy="610" r="210" fill="#ff765e" opacity=".08"/>
-  <text x="72" y="82" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" letter-spacing="2">LITTLE TOMATO</text>
-  <text x="72" y="132" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="42" font-weight="700">专注、任务与休息</text>
-  <text x="72" y="172" fill="#cfc4c8" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="20">一个会陪你完成事情，也会提醒你照顾自己的桌面伙伴</text>
-  <g filter="url(#shadow)"><rect x="82" y="232" width="220" height="258" rx="28" fill="#28242a" stroke="#51474f"/><rect x="336" y="232" width="220" height="258" rx="28" fill="#28242a" stroke="#51474f"/><rect x="590" y="232" width="220" height="258" rx="28" fill="#28242a" stroke="#51474f"/><rect x="844" y="232" width="274" height="258" rx="28" fill="#28242a" stroke="#51474f"/></g>
-  <g transform="translate(145 275)"><ellipse cx="48" cy="90" rx="47" ry="56" fill="url(#tomato)"/><path d="M48 35 C28 6 54 0 64 28 C80 3 99 18 71 45" fill="#64c88e"/><circle cx="33" cy="86" r="5" fill="#3c2c31"/><circle cx="64" cy="86" r="5" fill="#3c2c31"/><path d="M39 105 Q48 113 57 105" fill="none" stroke="#8d4a48" stroke-width="4" stroke-linecap="round"/></g>
-  <text x="110" y="405" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="25" font-weight="700">桌面宠物</text><text x="110" y="442" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">拖动 · 点击 · 右键</text><text x="110" y="468" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">动作 · 表情 · 情绪</text>
-  <g transform="translate(392 284)"><rect x="0" y="0" width="108" height="78" rx="18" fill="#3b3153" stroke="#8e7cf7"/><text x="54" y="50" text-anchor="middle" fill="#fff8f4" font-family="Segoe UI, sans-serif" font-size="34" font-weight="700">25:00</text><path d="M32 103 h44 M54 103 v46" stroke="#ff765e" stroke-width="8" stroke-linecap="round"/><circle cx="54" cy="169" r="25" fill="#ff765e"/><path d="M48 157 l18 12 -18 12z" fill="#fff8f4"/></g>
-  <text x="364" y="405" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="25" font-weight="700">番茄钟</text><text x="364" y="442" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">倒计时牌 · 暂停/开始</text><text x="364" y="468" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">完成撒花 · 起身确认</text>
-  <g transform="translate(642 278)"><rect x="0" y="0" width="110" height="42" rx="12" fill="#35303a"/><circle cx="23" cy="21" r="9" fill="none" stroke="#ff765e" stroke-width="3"/><path d="M19 21 l3 3 6 -7" fill="none" stroke="#ff765e" stroke-width="3"/><rect x="0" y="58" width="148" height="42" rx="12" fill="#35303a"/><circle cx="23" cy="79" r="9" fill="none" stroke="#8e7cf7" stroke-width="3"/><path d="M19 79 l3 3 6 -7" fill="none" stroke="#8e7cf7" stroke-width="3"/><rect x="0" y="116" width="88" height="42" rx="12" fill="#35303a"/><circle cx="23" cy="137" r="9" fill="#ff765e"/><text x="42" y="27" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16">写任务</text><text x="42" y="85" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16">分组</text><text x="42" y="143" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16">星标</text></g>
-  <text x="618" y="405" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="25" font-weight="700">Todo</text><text x="618" y="442" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">待做/已完成 · 重要</text><text x="618" y="468" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">分组 · 日期 · CSV 同步</text>
-  <g transform="translate(900 280)"><path d="M18 22 Q18 8 32 8 h104 l26 26 v108 q0 14 -14 14 H32 q-14 0 -14 -14z" fill="#355a49" stroke="#62d09b" stroke-width="3"/><path d="M18 36 h144" stroke="#62d09b" stroke-width="3" opacity=".8"/><circle cx="61" cy="91" r="20" fill="#62d09b" opacity=".25"/><path d="M51 91 l8 8 14 -18" fill="none" stroke="#d8ffe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text x="94" y="98" fill="#d8ffe8" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">提醒</text></g>
-  <text x="872" y="405" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="25" font-weight="700">温和陪伴</text><text x="872" y="442" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">健康 · 心理 · 效率</text><text x="872" y="468" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">短句 tips · 多语言</text>
-  <text x="72" y="595" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">LOCAL FIRST</text><text x="232" y="595" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">数据默认保存在本地，不读取微信聊天消息</text>
+  <rect width="1200" height="820" rx="34" fill="url(#bg)"/>
+  <circle cx="1080" cy="86" r="210" fill="#7258d6" opacity=".13"/><circle cx="100" cy="760" r="210" fill="#ff765e" opacity=".08"/>
+  <text x="76" y="78" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" letter-spacing="2">LITTLE TOMATO</text>
+  <text x="76" y="128" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="42" font-weight="700">专注、任务与休息</text>
+  <text x="76" y="168" fill="#cfc4c8" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="20">一个会陪你完成事情，也会提醒你照顾自己的桌面伙伴</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="220" width="520" height="246" rx="28" fill="#28242b" stroke="#51474f"/>
+    <rect x="610" y="220" width="520" height="246" rx="28" fill="#28242b" stroke="#51474f"/>
+    <rect x="70" y="496" width="520" height="246" rx="28" fill="#28242b" stroke="#51474f"/>
+    <rect x="610" y="496" width="520" height="246" rx="28" fill="#28242b" stroke="#51474f"/>
+  </g>
+
+  <!-- Pet card -->
+  <g transform="translate(112 276)">
+    <circle cx="74" cy="70" r="70" fill="#352c39" stroke="#6c5bd4" stroke-width="2"/>
+    <ellipse cx="74" cy="84" rx="43" ry="51" fill="url(#tomato)"/>
+    <path d="M74 37 C53 9 72 0 86 28 C104 5 121 20 94 48" fill="#64c88e"/>
+    <circle cx="59" cy="78" r="5" fill="#3c2c31"/><circle cx="89" cy="78" r="5" fill="#3c2c31"/>
+    <path d="M65 98 Q74 106 83 98" fill="none" stroke="#8d4a48" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <text x="292" y="286" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">01 · COMPANION</text>
+  <text x="292" y="324" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">桌面宠物</text>
+  <text x="292" y="362" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">透明悬浮，随手拖到舒服的位置</text>
+  <text x="292" y="394" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">点击、右键和互动都会有动作反馈</text>
+  <text x="292" y="430" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">显示 / 隐藏 · 动作 · 情绪</text>
+
+  <!-- Timer card -->
+  <g transform="translate(652 276)">
+    <circle cx="74" cy="70" r="70" fill="#352c39" stroke="#ff765e" stroke-width="2"/>
+    <rect x="30" y="31" width="88" height="72" rx="15" fill="#40345c" stroke="#a18cff" stroke-width="2"/>
+    <text x="74" y="76" text-anchor="middle" fill="#fff8f4" font-family="Segoe UI, sans-serif" font-size="25" font-weight="700">25:00</text>
+    <path d="M44 119 h60" stroke="#ff765e" stroke-width="7" stroke-linecap="round"/><path d="M74 119 v22" stroke="#ff765e" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <text x="832" y="286" fill="#ff765e" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">02 · FOCUS</text>
+  <text x="832" y="324" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">番茄钟</text>
+  <text x="832" y="362" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">宠物拿出倒计时牌，显示剩余时间</text>
+  <text x="832" y="394" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">牌子上可暂停或继续，结束会撒花</text>
+  <text x="832" y="430" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">专注 · 休息 · 起身确认</text>
+
+  <!-- Todo card -->
+  <g transform="translate(112 552)">
+    <circle cx="74" cy="70" r="70" fill="#352c39" stroke="#8e7cf7" stroke-width="2"/>
+    <g stroke-linecap="round" stroke-width="5">
+      <path d="M42 48 h12 M42 70 h12 M42 92 h12" stroke="#ff765e"/>
+      <path d="M70 48 h42 M70 70 h42 M70 92 h28" stroke="#fff8f4" opacity=".9"/>
+    </g>
+    <path d="M43 119 h66" stroke="#8e7cf7" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <text x="292" y="562" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">03 · PLAN</text>
+  <text x="292" y="600" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">Todo 任务</text>
+  <text x="292" y="638" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">待做 / 已完成，重要任务一眼可见</text>
+  <text x="292" y="670" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">分组、星标、日期和倒数都放在一起</text>
+  <text x="292" y="706" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">右键编辑 · 分组 · 直接删除</text>
+
+  <!-- Reminder card -->
+  <g transform="translate(652 552)">
+    <circle cx="74" cy="70" r="70" fill="#352c39" stroke="#62d09b" stroke-width="2"/>
+    <path d="M31 51 Q31 38 44 38 h61 l22 22 v57 q0 13 -13 13 H44 q-13 0 -13 -13z" fill="#355a49" stroke="#62d09b" stroke-width="3"/>
+    <path d="M31 59 h96" stroke="#62d09b" stroke-width="3" opacity=".8"/><path d="M53 84 l14 14 27 -31" fill="none" stroke="#d8ffe8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="832" y="562" fill="#62d09b" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">04 · CARE</text>
+  <text x="832" y="600" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">温和提醒</text>
+  <text x="832" y="638" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">tips 覆盖健康、心理与工作效率</text>
+  <text x="832" y="670" fill="#c8bdc2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18">短句、动作和情绪会随状态变化</text>
+  <text x="832" y="706" fill="#8e7cf7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17" font-weight="700">本地优先 · 多语言 · 不读微信消息</text>
 </svg>
