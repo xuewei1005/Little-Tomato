@@ -9,7 +9,15 @@
 
 [下载 Windows 便携版 / Download portable Windows build](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) · [完整双语说明 / Full bilingual guide](./docs/guide.md)
 
-[观看介绍视频（2026-10-22） / Watch the introduction video (2026-10-22)](./介绍视频10月22日.mp4)
+<p align="center">
+  <video controls preload="metadata" width="100%" poster="https://raw.githubusercontent.com/xuewei1005/Little-Tomato/main/docs/images/introduction-video-poster.png">
+    <source src="https://raw.githubusercontent.com/xuewei1005/Little-Tomato/main/%E4%BB%8B%E7%BB%8D%E8%A7%86%E9%A2%9110%E6%9C%8822%E6%97%A5.mp4" type="video/mp4" />
+  </video>
+</p>
+
+[打开介绍视频（2026-10-22） / Open the introduction video (2026-10-22)](./介绍视频10月22日.mp4)
+
+![介绍视频封面 / Introduction video poster](./docs/images/introduction-video-poster.png)
 
 ![小番茄功能总览 / Little Tomato features](./docs/images/feature-map.png)
 
