@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { deleteTodoGroup } from '../../src/domain/todoGroupStore';
 import { createTodo } from '../../src/domain/todoStore';
 import { mergeTodoSyncDocuments, parseTodoSyncDocument, serializeTodoSyncDocument } from '../../src/domain/todoSync';
 import type { TodoGroup } from '../../src/domain/types';
@@ -59,6 +60,21 @@ describe('TodoSync', () => {
     );
 
     expect(merged.todos[0].title).toBe('最新本地事项');
+    expect(merged.importedCount).toBe(0);
+    expect(merged.conflictCount).toBe(1);
+  });
+
+  it('does not resurrect a locally deleted group from an older sync file', () => {
+    const deleted = deleteTodoGroup([group], [], group.id, 2_000);
+    const staleRemote = { ...group, archived: false, updatedAtMs: 1_500 };
+
+    const merged = mergeTodoSyncDocuments(
+      { todos: deleted.todos, groups: deleted.groups },
+      { todos: [], groups: [staleRemote] },
+    );
+
+    expect(merged.groups).toEqual(deleted.groups);
+    expect(merged.groups[0].archived).toBe(true);
     expect(merged.importedCount).toBe(0);
     expect(merged.conflictCount).toBe(1);
   });

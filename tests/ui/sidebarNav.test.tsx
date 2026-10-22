@@ -64,6 +64,14 @@ describe('SidebarNav', () => {
     expect(screen.getByRole('button', { name: /工作/ }).querySelector('.group-icon-slot')).not.toBeNull();
   });
 
+  it('hides archived groups from the sidebar', () => {
+    const archivedGroup = { ...group, id: 'archived', name: '已删除', archived: true };
+    render(<SidebarNav activeView="active" groups={[group, archivedGroup]} counts={{}} onSelect={vi.fn()} onOpenGroups={vi.fn()} onCreateGroup={vi.fn()} onDeleteGroup={vi.fn()} />);
+
+    expect(screen.getByRole('button', { name: /工作/ })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /已删除/ })).not.toBeInTheDocument();
+  });
+
   it('creates a group from a blank-area context menu', () => {
     const onCreateGroup = vi.fn();
     render(<SidebarNav activeView="active" groups={[]} counts={{}} onSelect={vi.fn()} onOpenGroups={vi.fn()} onCreateGroup={onCreateGroup} onDeleteGroup={vi.fn()} />);

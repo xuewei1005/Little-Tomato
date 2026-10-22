@@ -10,6 +10,7 @@ work/
 *.tsbuildinfo
 .vite/
 .vitest/
+__pycache__/
 
 # Local editor and operating-system files
 .vscode/

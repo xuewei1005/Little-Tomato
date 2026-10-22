@@ -55,6 +55,7 @@ export function SidebarNav({ activeView, groups, counts, onSelect, onOpenGroups,
     { id: 'active', icon: 'active', label: t('nav.pending') },
     { id: 'important', icon: 'important', label: t('nav.important'), className: 'important' },
   ];
+  const visibleGroups = groups.filter((group) => !group.archived);
 
   useLayoutEffect(() => {
     if (!contextMenu || !menuRef.current) return;
@@ -108,13 +109,13 @@ export function SidebarNav({ activeView, groups, counts, onSelect, onOpenGroups,
         <div>
           <div className="sidebar-section-title"><span>{t('nav.groups')}</span><button className="mini-action" onClick={onOpenGroups} aria-label={t('nav.manage')}>{t('nav.manage')}</button></div>
           <nav className="group-list" aria-label={t('nav.groups')}>
-            {groups.map((group) => (
+            {visibleGroups.map((group) => (
               <button key={group.id} className={`nav-item ${activeView === `group:${group.id}` ? 'active' : ''}`} onClick={() => onSelect(`group:${group.id}`)} onContextMenu={(event) => openGroupContextMenu(event, group)}>
                 <span className="group-dot group-icon-slot" style={{ '--group-color': group.accentColor } as CSSProperties} />
                 <span className="nav-label">{group.name}</span><span className="nav-count">{counts[`group:${group.id}`] ?? 0}</span>
               </button>
             ))}
-            {groups.length === 0 && <div style={{ color: 'var(--ink-faint)', fontSize: 12, padding: '11px 10px' }}>{t('nav.emptyGroups')}</div>}
+            {visibleGroups.length === 0 && <div style={{ color: 'var(--ink-faint)', fontSize: 12, padding: '11px 10px' }}>{t('nav.emptyGroups')}</div>}
           </nav>
         </div>
         <nav className="sidebar-nav completed-nav" aria-label={t('nav.completed')}>

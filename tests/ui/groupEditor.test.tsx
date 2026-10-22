@@ -20,4 +20,12 @@ describe('GroupEditor', () => {
     expect(onDelete).toHaveBeenCalledWith('work');
     vi.unstubAllGlobals();
   });
+
+  it('does not show archived groups in the manager', () => {
+    const archivedGroup = { ...group, id: 'archived', name: '已删除', archived: true };
+    render(<GroupEditor groups={[group, archivedGroup]} onAdd={vi.fn()} onRename={vi.fn()} onDelete={vi.fn()} onClose={vi.fn()} />);
+
+    expect(screen.getByText('工作')).toBeInTheDocument();
+    expect(screen.queryByText('已删除')).not.toBeInTheDocument();
+  });
 });

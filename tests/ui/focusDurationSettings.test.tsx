@@ -1,8 +1,10 @@
-import { act, cleanup, fireEvent, render as renderComponent, screen, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render as renderComponent, screen, waitFor, within } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DEFAULT_FOCUS_TIMER_CONFIG } from '../../src/domain/focusTimer';
+import { createTodoGroup } from '../../src/domain/todoGroupStore';
 import { DEFAULT_SETTINGS, loadSettings, saveSettings } from '../../src/domain/settingsStore';
+import { createTodo } from '../../src/domain/todoStore';
 import type { FocusTimerConfig } from '../../src/domain/types';
 import { FocusDurationSettings } from '../../src/ui/settings/FocusDurationSettings';
 import { SettingsWindow } from '../../src/ui/settings/SettingsWindow';
@@ -150,5 +152,32 @@ describe('focus duration integration', () => {
     fireEvent.click(screen.getByRole('button', { name: '跳过' }));
     fireEvent.click(screen.getByRole('button', { name: '我站起来了' }));
     expect(screen.getByText('07:00')).toBeInTheDocument();
+  });
+
+  it('falls back to pending tasks when the selected group is archived', async () => {
+    const group = createTodoGroup('已删除分组', 1_000);
+    saveSettings({ ...DEFAULT_SETTINGS, todoGroups: [{ ...group, archived: true }], activeTodoView: `group:${group.id}` });
+    await mountApp();
+
+    expect(screen.getByRole('heading', { name: '待做任务' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '已删除分组' })).not.toBeInTheDocument();
+  });
+
+  it('moves active tasks to pending when a group is deleted from the manager', async () => {
+    vi.useRealTimers();
+    const group = createTodoGroup('工作', 1_000);
+    const todo = { ...createTodo({ title: '跟进客户', groupId: group.id }, 1_000), lastRemindedAtMs: Date.now() };
+    saveSettings({ ...DEFAULT_SETTINGS, todoGroups: [group], todoItems: [todo], activeTodoView: `group:${group.id}` });
+    await mountApp();
+
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '管理' })); });
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '删除' })); });
+    expect(screen.getByRole('heading', { name: '待做任务' })).toBeInTheDocument();
+    expect(screen.getByText('跟进客户')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(loadSettings().todoItems[0].groupId).toBeUndefined();
+      expect(loadSettings().todoGroups[0].archived).toBe(true);
+    });
+    expect(screen.queryByRole('button', { name: /^工作/ })).not.toBeInTheDocument();
   });
 });

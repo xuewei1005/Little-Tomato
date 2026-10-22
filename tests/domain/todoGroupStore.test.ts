@@ -8,13 +8,15 @@ import {
 import { completeTodo, createTodo } from '../../src/domain/todoStore';
 
 describe('Todo groups and smart views', () => {
-  it('moves todos into 未分组 when a custom group is deleted', () => {
+  it('archives a deleted group for sync and moves its todos to pending without changing completion', () => {
     const group = createTodoGroup('日常', 1_000);
-    const todo = createTodo({ title: '软件同步', groupId: group.id, starred: true }, 1_000);
-    const deleted = deleteTodoGroup([group], [todo], group.id);
+    const activeTodo = createTodo({ title: '软件同步', groupId: group.id, starred: true }, 1_000);
+    const completedTodo = completeTodo(createTodo({ title: '已完成', groupId: group.id }, 1_000), 2_000);
+    const deleted = deleteTodoGroup([group], [activeTodo, completedTodo], group.id, 3_000);
 
-    expect(deleted.groups).toHaveLength(0);
-    expect(deleted.todos[0].groupId).toBeUndefined();
+    expect(deleted.groups).toEqual([{ ...group, archived: true, updatedAtMs: 3_000 }]);
+    expect(deleted.todos[0]).toMatchObject({ groupId: undefined, status: 'active', updatedAtMs: 3_000 });
+    expect(deleted.todos[1]).toMatchObject({ groupId: undefined, status: 'completed', updatedAtMs: 3_000 });
   });
 
   it('supports pending and completed task smart views', () => {

@@ -34,10 +34,11 @@ export function deleteTodoGroup(
   groups: TodoGroup[],
   todos: TodoItem[],
   id: string,
+  deletedAtMs = Date.now(),
 ): { groups: TodoGroup[]; todos: TodoItem[] } {
   return {
-    groups: groups.filter((group) => group.id !== id),
-    todos: todos.map((todo) => (todo.groupId === id ? { ...todo, groupId: undefined, updatedAtMs: Date.now() } : todo)),
+    groups: groups.map((group) => (group.id === id ? { ...group, archived: true, updatedAtMs: deletedAtMs } : group)),
+    todos: todos.map((todo) => (todo.groupId === id ? { ...todo, groupId: undefined, updatedAtMs: deletedAtMs } : todo)),
   };
 }
 

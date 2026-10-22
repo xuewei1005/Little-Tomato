@@ -166,7 +166,10 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
   }, [settings.todoItems, settings.reminderMode, settings.quietHours, settings.scheduledReminders, settings.holidayReminderEnabled]);
 
   const todos = settings.todoItems;
-  const groups = settings.todoGroups;
+  const groups = useMemo(() => settings.todoGroups.filter((group) => !group.archived), [settings.todoGroups]);
+  useEffect(() => {
+    if (activeView.startsWith('group:') && !groups.some((group) => `group:${group.id}` === activeView)) setActiveView('active');
+  }, [activeView, groups]);
   const counts = useMemo(() => getTodoCounts(todos, new Date(now)), [todos, now]);
   const filteredTodos = useMemo(() => filterTodosByView(todos, activeView, new Date(now)), [todos, activeView, now]);
   const visualState = getPetVisualState({ focusPhase: timer.phase, hasReminder: Boolean(reminderMessage) || timer.phase === 'shortBreak' || timer.phase === 'longBreak', hasIncomingNotification: false });
@@ -187,7 +190,7 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
   const addGroup = (name: string) => {
     const targetTodoId = groupTargetTodoId;
     setSettings((current) => {
-      const group = createTodoGroup(name, Date.now(), current.todoGroups.length);
+      const group = createTodoGroup(name, Date.now(), current.todoGroups.filter((item) => !item.archived).length);
       return {
         ...current,
         todoGroups: [...current.todoGroups, group],
@@ -199,8 +202,16 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
   const moveTodoToGroup = (todo: TodoItem, groupId?: string) => setSettings((current) => ({ ...current, todoItems: current.todoItems.map((item) => item.id === todo.id ? { ...item, groupId, updatedAtMs: Date.now() } : item) }));
   const renameGroup = (id: string, name: string) => setSettings((current) => ({ ...current, todoGroups: renameTodoGroup(current.todoGroups, id, name) }));
   const removeGroup = (id: string) => {
+    setSettings((current) => {
+      const result = deleteTodoGroup(current.todoGroups, current.todoItems, id);
+      return {
+        ...current,
+        todoGroups: result.groups,
+        todoItems: result.todos,
+        activeTodoView: current.activeTodoView === `group:${id}` ? 'active' : current.activeTodoView,
+      };
+    });
     setActiveView((current) => current === `group:${id}` ? 'active' : current);
-    setSettings((current) => { const result = deleteTodoGroup(current.todoGroups, current.todoItems, id); return { ...current, ...result, activeTodoView: current.activeTodoView === `group:${id}` ? 'active' : current.activeTodoView }; });
   };
   const timerConfig = { ...settings.focus, standUpMinutes: settings.standUpMinutes };
   const startTimer = () => setTimer((state) => {

@@ -9,6 +9,8 @@
 
 [下载 Windows 便携版 / Download portable Windows build](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) · [完整双语说明 / Full bilingual guide](./docs/guide.md)
 
+[观看介绍视频（2026-10-22） / Watch the introduction video (2026-10-22)](./介绍视频10月22日.mp4)
+
 ![小番茄功能总览 / Little Tomato features](./docs/images/feature-map.png)
 
 ## 这是什么？ / What is Little Tomato?
