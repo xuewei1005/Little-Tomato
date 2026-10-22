@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">小番茄使用流程</title>
+  <desc id="desc">下载、建立 Todo、开始番茄钟、同步数据四步流程</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b181d"/><stop offset="1" stop-color="#312938"/></linearGradient><linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8c6c"/><stop offset="1" stop-color="#d95867"/></linearGradient></defs>
+  <rect width="1200" height="420" rx="30" fill="url(#bg)"/>
+  <text x="60" y="60" fill="#fff8f4" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="28" font-weight="700">从打开到开始专注，只需要四步</text><text x="60" y="92" fill="#bfb1b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="17">Download → Plan → Focus → Sync</text>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <g transform="translate(72 145)"><circle cx="36" cy="36" r="36" fill="url(#accent)"/><text x="36" y="47" text-anchor="middle" fill="#fff8f4" font-size="27" font-weight="700">1</text><text x="0" y="112" fill="#fff8f4" font-size="22" font-weight="700">下载</text><text x="0" y="144" fill="#bfb1b7" font-size="16">Release 页面</text><text x="0" y="170" fill="#bfb1b7" font-size="16">双击 EXE 运行</text></g>
+    <path d="M236 181 h76 M306 171 l16 10 -16 10" fill="none" stroke="#6e6172" stroke-width="3" stroke-dasharray="8 8"/>
+    <g transform="translate(350 145)"><circle cx="36" cy="36" r="36" fill="#6c5bd4"/><text x="36" y="47" text-anchor="middle" fill="#fff8f4" font-size="27" font-weight="700">2</text><text x="0" y="112" fill="#fff8f4" font-size="22" font-weight="700">写任务</text><text x="0" y="144" fill="#bfb1b7" font-size="16">新建 Todo</text><text x="0" y="170" fill="#bfb1b7" font-size="16">分组或标星</text></g>
+    <path d="M514 181 h76 M584 171 l16 10 -16 10" fill="none" stroke="#6e6172" stroke-width="3" stroke-dasharray="8 8"/>
+    <g transform="translate(628 145)"><circle cx="36" cy="36" r="36" fill="#49a879"/><text x="36" y="47" text-anchor="middle" fill="#fff8f4" font-size="27" font-weight="700">3</text><text x="0" y="112" fill="#fff8f4" font-size="22" font-weight="700">专注</text><text x="0" y="144" fill="#bfb1b7" font-size="16">右键宠物</text><text x="0" y="170" fill="#bfb1b7" font-size="16">开启番茄钟</text></g>
+    <path d="M792 181 h76 M862 171 l16 10 -16 10" fill="none" stroke="#6e6172" stroke-width="3" stroke-dasharray="8 8"/>
+    <g transform="translate(906 145)"><circle cx="36" cy="36" r="36" fill="#d18d55"/><text x="36" y="47" text-anchor="middle" fill="#fff8f4" font-size="27" font-weight="700">4</text><text x="0" y="112" fill="#fff8f4" font-size="22" font-weight="700">同步</text><text x="0" y="144" fill="#bfb1b7" font-size="16">设置 CSV 路径</text><text x="0" y="170" fill="#bfb1b7" font-size="16">换电脑继续用</text></g>
+  </g>
+</svg>
