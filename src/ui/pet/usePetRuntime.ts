@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { emit, listen } from '@tauri-apps/api/event';
 import { createFocusTimerState, getStandUpPromptMood } from '../../domain/focusTimer';
-import { PET_RUNTIME_EVENT, PET_RUNTIME_SYNC_REQUEST, petNoticeFromRuntimeEvent, selectPetNotice, type PetNotice, type PetRuntimeEvent } from '../../domain/petRuntime';
+import { getTimerSoundCue, PET_RUNTIME_EVENT, PET_RUNTIME_SYNC_REQUEST, petNoticeFromRuntimeEvent, selectPetNotice, type PetNotice, type PetRuntimeEvent, type TimerSoundCue } from '../../domain/petRuntime';
 import { getPetVisualState } from '../../domain/petStateMachine';
 import { getRandomTip, localizeTip } from '../../domain/tipsLibrary';
 import { personalizePetSpeech } from '../../domain/petSpeech';
@@ -32,7 +32,10 @@ export function usePetRuntime(options: UsePetRuntimeOptions = {}) {
   const [notice, setNotice] = useState<PetNotice | null>(null);
   const [clockMs, setClockMs] = useState(() => Date.now());
   const [showConfetti, setShowConfetti] = useState(false);
+  const [timerSoundCue, setTimerSoundCue] = useState<{ type: TimerSoundCue; id: number } | null>(null);
   const previousTimerRef = useRef(timerState);
+  const hasSeenTimerRef = useRef(false);
+  const soundCueIdRef = useRef(0);
   const confettiTimerRef = useRef<number | null>(null);
   const queuedNoticesRef = useRef<PetNotice[]>([]);
   const displayNameRef = useRef(options.displayName ?? options.settingsSnapshot?.displayName ?? '');
@@ -83,6 +86,12 @@ export function usePetRuntime(options: UsePetRuntimeOptions = {}) {
       if (payload.type === 'timer-state') {
         const previous = previousTimerRef.current;
         previousTimerRef.current = payload.state;
+        if (hasSeenTimerRef.current) {
+          const soundCue = getTimerSoundCue(previous, payload.state);
+          if (soundCue) setTimerSoundCue({ type: soundCue, id: ++soundCueIdRef.current });
+        } else {
+          hasSeenTimerRef.current = true;
+        }
         const enteringStandUp = previous.phase !== 'standUp' && payload.state.phase === 'standUp' && payload.state.status === 'awaitingStandUp';
         const leavingStandUp = previous.phase === 'standUp' && payload.state.phase !== 'standUp';
         if (enteringStandUp) {
@@ -177,5 +186,5 @@ export function usePetRuntime(options: UsePetRuntimeOptions = {}) {
     });
   }, [activeNotice, showConfetti, standUpMood, timerState.phase]);
 
-  return { timerState, settingsSnapshot, message, visualState, showTip, showConfetti, standUpMood };
+  return { timerState, settingsSnapshot, message, visualState, showTip, showConfetti, standUpMood, timerSoundCue };
 }

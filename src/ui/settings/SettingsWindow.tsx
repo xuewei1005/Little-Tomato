@@ -113,8 +113,9 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
       petTheme: settings.petTheme,
       opacity: settings.opacity,
       animationEnabled: settings.animationEnabled,
+      soundEnabled: settings.soundEnabled,
     }, Date.now()));
-  }, [settings.language, settings.petName, settings.displayName, settings.petTheme, settings.opacity, settings.animationEnabled]);
+  }, [settings.language, settings.petName, settings.displayName, settings.petTheme, settings.opacity, settings.animationEnabled, settings.soundEnabled]);
   useEffect(() => {
     if (!isTauriRuntime()) return;
     let disposed = false;
@@ -124,7 +125,7 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
         const emittedAtMs = Date.now();
         sendPetRuntimeEvent(buildTimerStateEvent(timerRef.current, emittedAtMs));
         const current = settingsRef.current;
-        sendPetRuntimeEvent(buildPetSettingsEvent({ language: current.language, petName: current.petName, displayName: current.displayName, petTheme: current.petTheme, opacity: current.opacity, animationEnabled: current.animationEnabled }, emittedAtMs));
+        sendPetRuntimeEvent(buildPetSettingsEvent({ language: current.language, petName: current.petName, displayName: current.displayName, petTheme: current.petTheme, opacity: current.opacity, animationEnabled: current.animationEnabled, soundEnabled: current.soundEnabled }, emittedAtMs));
       }
     }).then((cleanup) => {
       if (disposed) cleanup();

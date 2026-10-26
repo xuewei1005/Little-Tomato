@@ -1,6 +1,6 @@
 [package]
 name = "xiaofanqie"
-version = "0.2.0"
+version = "0.2.1"
 description = "小番茄桌面宠物与专注助手"
 authors = ["小番茄"]
 edition = "2021"

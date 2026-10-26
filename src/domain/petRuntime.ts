@@ -20,6 +20,24 @@ export interface PetSettingsSnapshot {
   petTheme: PetTheme;
   opacity: number;
   animationEnabled: boolean;
+  soundEnabled: boolean;
+}
+
+export type TimerSoundCue = 'start' | 'complete';
+
+const TIMER_SOUND_PATHS: Record<TimerSoundCue, string> = {
+  start: '/sounds/timer-start.mp3',
+  complete: '/sounds/timer-complete.mp3',
+};
+
+export function getTimerSoundPath(cue: TimerSoundCue): string {
+  return TIMER_SOUND_PATHS[cue];
+}
+
+export function getTimerSoundCue(previous: FocusTimerState, next: FocusTimerState): TimerSoundCue | null {
+  if (previous.phase !== 'standUp' && next.phase === 'standUp' && next.status === 'awaitingStandUp') return 'complete';
+  if (next.status === 'running' && previous.status !== 'running') return 'start';
+  return null;
 }
 
 export type PetRuntimeEvent =

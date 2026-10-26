@@ -19,7 +19,7 @@ vi.mock('@tauri-apps/api/event', () => ({
 
 function Harness() {
   const runtime = usePetRuntime({ displayName: '朋友' });
-  return <output data-testid="runtime">{JSON.stringify({ message: runtime.message, visualState: runtime.visualState, showTip: runtime.showTip, showConfetti: runtime.showConfetti, standUpMood: runtime.standUpMood })}</output>;
+  return <output data-testid="runtime">{JSON.stringify({ message: runtime.message, visualState: runtime.visualState, showTip: runtime.showTip, showConfetti: runtime.showConfetti, standUpMood: runtime.standUpMood, timerSoundCue: runtime.timerSoundCue })}</output>;
 }
 
 function readRuntime() {
@@ -53,6 +53,17 @@ describe('usePetRuntime', () => {
     expect(readRuntime()).toMatchObject({ showConfetti: true, visualState: 'celebrate', standUpMood: 'waiting' });
     act(() => { vi.advanceTimersByTime(4_200); });
     expect(readRuntime().showConfetti).toBe(false);
+  });
+
+  it('emits a start sound cue after the initial timer synchronization', () => {
+    render(<Harness />);
+    const idle = createFocusTimerState();
+    const running = { ...idle, phase: 'focus' as const, status: 'running' as const, startedAtMs: 10_000 };
+
+    act(() => listeners.get(PET_RUNTIME_EVENT)?.({ payload: { type: 'timer-state', state: idle, emittedAtMs: 10_000 } }));
+    act(() => listeners.get(PET_RUNTIME_EVENT)?.({ payload: { type: 'timer-state', state: running, emittedAtMs: 10_000 } }));
+
+    expect(readRuntime().timerSoundCue).toMatchObject({ type: 'start' });
   });
 
   it('turns the stand-up prompt angry after the grace period', () => {

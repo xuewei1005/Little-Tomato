@@ -27,7 +27,7 @@ describe('Windows application package manifest', () => {
   });
 
   it('leaves only the named portable app and Todo sync file in outputs', () => {
-    for (const file of ['小番茄-安装（v2610-A）.exe', '小番茄-Todo.csv']) {
+    for (const file of ['小番茄-安装（v2610-B）.exe', '小番茄-Todo.csv']) {
       expect(existsSync(resolve(root, 'outputs', file))).toBe(true);
     }
     for (const file of [

@@ -14,6 +14,7 @@ import { PET_ACTION_EVENT, localizePetReaction, pickPetReaction } from './petInt
 import { usePetInteraction } from './usePetInteraction';
 import { usePetRuntime } from './usePetRuntime';
 import { translate } from '../../i18n/catalog';
+import { getTimerSoundPath } from '../../domain/petRuntime';
 
 export function PetWindow() {
   const [settings] = useState<AppSettings>(() => loadSettings());
@@ -28,9 +29,23 @@ export function PetWindow() {
   const runtime = usePetRuntime({
     displayName: settings.displayName,
     focusConfig: { ...settings.focus, standUpMinutes: settings.standUpMinutes },
-    settingsSnapshot: { language: settings.language, petName: settings.petName, displayName: settings.displayName, petTheme: settings.petTheme, opacity: settings.opacity, animationEnabled: settings.animationEnabled },
+    settingsSnapshot: { language: settings.language, petName: settings.petName, displayName: settings.displayName, petTheme: settings.petTheme, opacity: settings.opacity, animationEnabled: settings.animationEnabled, soundEnabled: settings.soundEnabled },
   });
-  const liveSettings = runtime.settingsSnapshot ?? { language: settings.language, petName: settings.petName, displayName: settings.displayName, petTheme: settings.petTheme, opacity: settings.opacity, animationEnabled: settings.animationEnabled };
+  const liveSettings = runtime.settingsSnapshot ?? { language: settings.language, petName: settings.petName, displayName: settings.displayName, petTheme: settings.petTheme, opacity: settings.opacity, animationEnabled: settings.animationEnabled, soundEnabled: settings.soundEnabled };
+  const playedSoundCueIdRef = useRef(0);
+
+  useEffect(() => {
+    const cue = runtime.timerSoundCue;
+    if (!cue || cue.id <= playedSoundCueIdRef.current) return;
+    playedSoundCueIdRef.current = cue.id;
+    if (!liveSettings.soundEnabled || typeof Audio === 'undefined') return;
+    const audio = new Audio(getTimerSoundPath(cue.type));
+    audio.preload = 'auto';
+    audio.volume = cue.type === 'complete' ? 0.72 : 0.58;
+    void audio.play().catch(() => {
+      // Windows may block autoplay until the app has an audio-capable interaction.
+    });
+  }, [liveSettings.soundEnabled, runtime.timerSoundCue]);
 
   useEffect(() => {
     if (runtime.visualState === 'angry') setActionSeed((seed) => seed + 1);

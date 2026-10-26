@@ -44,7 +44,7 @@ $values = @{
   '@@CERT_SHA256@@' = (Get-FileHash -LiteralPath (Join-Path $fixture 'publisher.cer') -Algorithm SHA256).Hash
   '@@CERT_THUMBPRINT@@' = $certificate.Thumbprint
   '@@PACKAGE_SHA256@@' = (Get-FileHash -LiteralPath (Join-Path $fixture 'payload.msix') -Algorithm SHA256).Hash
-  '@@PACKAGE_VERSION@@' = '0.2.0.0'
+  '@@PACKAGE_VERSION@@' = '0.2.1.0'
 }
 foreach ($name in @('trust-certificate', 'install-package')) {
   $content = [IO.File]::ReadAllText((Join-Path $PSScriptRoot "installer\$name.ps1.in"))
@@ -72,9 +72,9 @@ if ($tamperedExit -eq 0) { throw 'Tampered certificate was accepted.' }
 Write-Host 'PASS: tampered certificate is rejected before elevation/deployment.'
 
 $nsis = if ($MakeNsis) { $MakeNsis } else { Join-Path $env:LOCALAPPDATA 'tauri\NSIS\Bin\makensis.exe' }
-& $nsis /V2 "/DPAYLOAD_DIR=$fixture" "/DINSTALLER_OUT=$(Join-Path $testDirectory 'compile-only-do-not-install.exe')" "/DAPP_ICON=$(Join-Path $root 'src-tauri\icons\icon.ico')" /DAPP_VERSION=0.2.0.0 (Join-Path $PSScriptRoot 'installer\bootstrap.nsi')
+& $nsis /V2 "/DPAYLOAD_DIR=$fixture" "/DINSTALLER_OUT=$(Join-Path $testDirectory 'compile-only-do-not-install.exe')" "/DAPP_ICON=$(Join-Path $root 'src-tauri\icons\icon.ico')" /DAPP_VERSION=0.2.1.0 (Join-Path $PSScriptRoot 'installer\bootstrap.nsi')
 if ($LASTEXITCODE -ne 0) { throw "NSIS smoke compile failed: $LASTEXITCODE" }
-if ((Get-Item -LiteralPath (Join-Path $testDirectory 'compile-only-do-not-install.exe')).VersionInfo.FileVersion -ne '0.2.0.0') {
+if ((Get-Item -LiteralPath (Join-Path $testDirectory 'compile-only-do-not-install.exe')).VersionInfo.FileVersion -ne '0.2.1.0') {
   throw 'NSIS smoke executable has the wrong version.'
 }
 Write-Host 'PASS: NSIS bootstrap compiles.'

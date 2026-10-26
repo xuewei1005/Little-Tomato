@@ -6,7 +6,7 @@
 
 ### 下载与启动
 
-1. 打开 [GitHub Release](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A)。
+1. 打开 [GitHub Release](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-B)。
 2. 下载 Windows 便携版 EXE。
 3. 双击运行即可，不需要安装向导，也不会把个人 Todo 写入 GitHub 仓库。
 
@@ -135,7 +135,7 @@ Todo CSV 是个人数据，项目仓库会主动忽略它。请把它放在自�
 
 ### First run
 
-Download the Windows portable EXE from the [GitHub Release](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) and double-click it. No installer wizard is required.
+Download the Windows portable EXE from the [GitHub Release](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-B) and double-click it. No installer wizard is required.
 
 - The tomato button shows or hides the desktop pet.
 - The gear button opens settings.

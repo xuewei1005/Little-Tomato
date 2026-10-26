@@ -21,7 +21,7 @@
   !error "APP_ICON is required"
 !endif
 !ifndef APP_VERSION
-  !define APP_VERSION "0.2.0.0"
+  !define APP_VERSION "0.2.1.0"
 !endif
 
 Name "小番茄"

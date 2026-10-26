@@ -38,7 +38,7 @@ if (-not $MsixPath) {
   }
   if (-not (Test-Path -LiteralPath $releasePath -PathType Leaf)) { throw "Build the release executable first: $releasePath" }
   $fileVersion = (Get-Item -LiteralPath $releasePath).VersionInfo.FileVersion
-  # Tauri may expose FileVersion as 0.2.0 while MSIX requires 0.2.0.0.
+  # Tauri may expose FileVersion as 0.2.1 while MSIX requires 0.2.1.0.
   $normalizedFileVersion = [version]$fileVersion
   if ($normalizedFileVersion.Revision -lt 0) {
     $normalizedFileVersion = [version]('{0}.{1}.{2}.0' -f $normalizedFileVersion.Major, $normalizedFileVersion.Minor, $normalizedFileVersion.Build)

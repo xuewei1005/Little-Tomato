@@ -9,7 +9,7 @@ pnpm tauri build --no-bundle
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-portable.ps1
 ```
 
-This produces `outputs\小番茄-安装（v2610-A）.exe`. It does not install an MSIX,
+This produces `outputs\小番茄-安装（v2610-B）.exe`. It does not install an MSIX,
 import a certificate, request UAC, or create shortcuts. `outputs\小番茄-Todo.csv`
 is preserved as the optional Todo sync file. The old NSIS/MSIX path below is kept
 for packaging regression checks only and is not part of the user-facing output.
@@ -22,13 +22,13 @@ bundled Codex runtime). No image generation service is used.
 
 ```powershell
 node scripts/generate-icons.mjs
-# After the main app changes and all 0.2.0 version bumps are ready:
+# After the main app changes and all 0.2.1 version bumps are ready:
 pnpm tauri build --no-bundle
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-single-installer.ps1
 ```
 
 The packaging script **does not build the app**. It refuses an EXE whose file
-version differs from the MSIX manifest (0.2.0.0). It packages/signs the existing
+version differs from the MSIX manifest (0.2.1.0). It packages/signs the existing
 release EXE into a unique directory below `work/single-installer`, compiles the
 bootstrap with `%LOCALAPPDATA%\tauri\NSIS\Bin\makensis.exe`, validates its
 embedded payload and version, and copies only `小番茄-安装.exe` into `outputs`.

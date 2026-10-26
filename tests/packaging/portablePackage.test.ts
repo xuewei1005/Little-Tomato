@@ -8,7 +8,7 @@ describe('portable delivery builder', () => {
   it('uses the requested portable filename and validates the release version', () => {
     const script = readFileSync(resolve(root, 'scripts/build-portable.ps1'), 'utf8');
 
-    expect(script).toContain('v2610-A');
+    expect(script).toContain('v2610-B');
     expect(script).toContain('[char]0x5C0F');
     expect(script).toContain('[char]0x5B89');
     expect(script).toContain('VersionInfo.FileVersion');

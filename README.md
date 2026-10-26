@@ -7,7 +7,7 @@
   <img src="./public/xiaofanqie-icon.png" width="88" alt="小番茄图标 / Little Tomato icon" />
 </p>
 
-[下载 Windows 便携版 / Download portable Windows build](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) · [完整双语说明 / Full bilingual guide](./docs/guide.md)
+[下载 Windows 便携版 / Download portable Windows build](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-B) · [完整双语说明 / Full bilingual guide](./docs/guide.md)
 
 ### 介绍视频 / Introduction video
 
@@ -41,7 +41,7 @@ Little Tomato is a calm Windows desktop pet for focus and Todo planning. It comb
 
 ## 3 分钟开始使用 / Get started in 3 minutes
 
-1. 打开 [Release 页面](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A)，下载 Windows 便携版 EXE。<br />Open the [Release page](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-A) and download the portable Windows EXE.
+1. 打开 [Release 页面](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-B)，下载 Windows 便携版 EXE。<br />Open the [Release page](https://github.com/xuewei1005/Little-Tomato/releases/tag/v2610-B) and download the portable Windows EXE.
 2. 下载完成后直接双击运行，不需要安装向导。<br />Double-click the downloaded EXE to run it; no installer wizard is required.
 3. 在主界面创建第一件事。点击任务只负责选中；右键任务可以设置、移动分组或直接删除。<br />Create your first task. Clicking selects a task; right-clicking lets you edit it, move it to a group, or delete it directly.
 4. 点击左侧番茄图标显示或隐藏桌面宠物；点击齿轮进入设置。<br />Click the tomato button to show or hide the pet; click the gear button to open Settings.

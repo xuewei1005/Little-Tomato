@@ -20,7 +20,7 @@ $destinationDirectory = if ($OutputDirectory) {
 }
 $appName = '' + [char]0x5C0F + [char]0x756A + [char]0x8304
 $installWord = '' + [char]0x5B89 + [char]0x88C5
-$portableName = "$appName-$installWord$([char]0xFF08)v2610-A$([char]0xFF09).exe"
+$portableName = "$appName-$installWord$([char]0xFF08)v2610-B$([char]0xFF09).exe"
 $destination = Join-Path $destinationDirectory $portableName
 $manifestPath = Join-Path $root 'src-tauri\manifest\Package.appxmanifest'
 
@@ -48,6 +48,7 @@ New-Item -ItemType Directory -Path $destinationDirectory -Force | Out-Null
 Copy-Item -LiteralPath $source -Destination $destination -Force
 
 $obsoleteNames = @(
+  "$appName-$installWord$([char]0xFF08)v2610-A$([char]0xFF09).exe",
   "$appName-$installWord.exe",
   "$appName-$([char]0x4FBF)$([char]0x643A).exe",
   "$appName-$([char]0x901A)$([char]0x77E5)$([char]0x7248).msix",
