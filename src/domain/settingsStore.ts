@@ -69,6 +69,7 @@ export function normalizeSettings(input: Partial<AppSettings>): AppSettings {
       shortBreakMinutes: validDuration(focus.shortBreakMinutes, base.focus.shortBreakMinutes, 60),
       longBreakMinutes: validDuration(focus.longBreakMinutes, base.focus.longBreakMinutes, 60),
       longBreakEvery: validDuration(focus.longBreakEvery, base.focus.longBreakEvery ?? 4, 12),
+      autoStartNext: focus.autoStartNext === true,
     },
     quietHours: { ...base.quietHours, ...(input.quietHours ?? {}) },
     petPosition: { ...base.petPosition, ...(input.petPosition ?? {}) },

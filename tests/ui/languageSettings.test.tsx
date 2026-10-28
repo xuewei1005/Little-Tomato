@@ -6,6 +6,15 @@ import { AppearanceSettings } from '../../src/ui/settings/AppearanceSettings';
 describe('language settings', () => {
   afterEach(() => cleanup());
 
+  it('allows automatic next focus to be enabled and all sounds to be disabled', () => {
+    const onChange = vi.fn();
+    render(<AppearanceSettings settings={DEFAULT_SETTINGS} onChange={onChange} />);
+    fireEvent.click(screen.getByRole('button', { name: '休息后自动开始下一轮' }));
+    expect(onChange).toHaveBeenCalledWith({ focus: { ...DEFAULT_SETTINGS.focus, autoStartNext: true } });
+    fireEvent.click(screen.getByRole('button', { name: '全部音效' }));
+    expect(onChange).toHaveBeenCalledWith({ soundEnabled: false });
+  });
+
   it('exposes the five language choices and persists a selection', () => {
     const onChange = vi.fn();
     render(<AppearanceSettings settings={DEFAULT_SETTINGS} onChange={onChange} />);

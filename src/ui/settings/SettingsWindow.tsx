@@ -185,7 +185,14 @@ export function SettingsWindow({ onLanguageChange }: SettingsWindowProps = {}) {
     setSettings((current) => ({ ...current, todoItems: current.todoItems.map((item) => item.id === todo.id ? deleteTodo(item) : item) }));
     setEditor({ open: false });
   };
-  const toggleTodo = (todo: TodoItem) => setSettings((current) => ({ ...current, todoItems: current.todoItems.map((item) => item.id === todo.id ? (item.status === 'completed' ? reopenTodo(item) : completeTodo(item)) : item) }));
+  const toggleTodo = (todo: TodoItem) => {
+    if (todo.status !== 'completed' && settingsRef.current.soundEnabled && typeof Audio !== 'undefined') {
+      const audio = new Audio('/sounds/todo-complete.mp3');
+      audio.volume = 0.6;
+      void audio.play().catch(() => undefined);
+    }
+    setSettings((current) => ({ ...current, todoItems: current.todoItems.map((item) => item.id === todo.id ? (item.status === 'completed' ? reopenTodo(item) : completeTodo(item)) : item) }));
+  };
   const starTodo = (todo: TodoItem) => setSettings((current) => ({ ...current, todoItems: current.todoItems.map((item) => item.id === todo.id ? toggleTodoStar(item) : item) }));
   const openGroupManager = (todo?: TodoItem) => { setGroupTargetTodoId(todo?.id ?? null); setShowGroups(true); };
   const addGroup = (name: string) => {

@@ -63,6 +63,7 @@ export interface FocusTimerConfig {
   longBreakMinutes: number;
   longBreakEvery?: number;
   standUpMinutes?: number;
+  autoStartNext?: boolean;
 }
 
 export type FocusPhase = 'idle' | 'focus' | 'shortBreak' | 'longBreak' | 'standUp';

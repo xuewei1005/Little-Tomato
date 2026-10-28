@@ -15,6 +15,7 @@ import { usePetInteraction } from './usePetInteraction';
 import { usePetRuntime } from './usePetRuntime';
 import { translate } from '../../i18n/catalog';
 import { getTimerSoundPath } from '../../domain/petRuntime';
+import { usePetHitTest } from './usePetHitTest';
 
 export function PetWindow() {
   const [settings] = useState<AppSettings>(() => loadSettings());
@@ -100,6 +101,7 @@ export function PetWindow() {
     reactionResetTimer.current = window.setTimeout(() => setReactionMessage(''), 4_800);
   }, [liveSettings.language, playAmbientAction]);
   const interaction = usePetInteraction({ onClickReaction });
+  usePetHitTest(interaction.interactionClass);
   const sendCommand = useCallback((command: PetCommand) => {
     if (typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window) void emit(PET_COMMAND_EVENT, command).catch(() => undefined);
   }, []);

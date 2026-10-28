@@ -18,9 +18,16 @@ const customConfig: FocusTimerConfig = {
   shortBreakMinutes: 7,
   longBreakMinutes: 19,
   longBreakEvery: 2,
+  autoStartNext: true,
 };
 
 describe('FocusTimer', () => {
+  it.each(['shortBreak', 'longBreak'] as const)('stops after %s by default until started manually', (phase) => {
+    const runningBreak: FocusTimerState = { ...createFocusTimerState(), phase, status: 'running', startedAtMs: 0, totalSec: 60, remainingSec: 60, completedFocusCount: 1 };
+    const ended = tickFocusTimer(runningBreak, 60_000);
+    expect(ended).toMatchObject({ phase, status: 'completed', remainingSec: 0, completedFocusCount: 1 });
+    expect(startFocusTimer(ended, 70_000)).toMatchObject({ phase: 'focus', status: 'running', startedAtMs: 70_000 });
+  });
   it('starts a focus session and calculates elapsed time from the clock', () => {
     const idle = createFocusTimerState({ focusMinutes: 25, shortBreakMinutes: 5, longBreakMinutes: 15 }, 1_000);
     const running = startFocusTimer(idle, 1_000);

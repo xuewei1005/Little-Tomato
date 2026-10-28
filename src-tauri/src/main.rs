@@ -59,6 +59,9 @@ fn build_tray(app: &mut tauri::App) -> tauri::Result<()> {
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            let _ = commands::show_main_window(app.clone());
+        }))
         .setup(|app| {
             build_tray(app)?;
             Ok(())

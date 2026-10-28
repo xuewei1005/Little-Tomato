@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "pet-hit-test",
+  "description": "Allow the pet window to pass mouse input through transparent areas",
+  "windows": ["pet"],
+  "permissions": ["core:window:allow-set-ignore-cursor-events"]
+}

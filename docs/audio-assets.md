@@ -1,5 +1,7 @@
 # 小番茄音效资源 / Little Tomato Audio Assets
 
+- `todo-complete.mp3`: [Soft Bell Ding](https://pixabay.com/sound-effects/technology-soft-bell-ding-485895/) by Universfield, Pixabay Content License.
+
 番茄钟开始和结束音效均为本地资源，软件运行时不需要联网下载。
 
 ## 开始音效

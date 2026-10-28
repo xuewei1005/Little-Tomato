@@ -6,6 +6,7 @@ export const DEFAULT_FOCUS_TIMER_CONFIG: FocusTimerConfig = {
   longBreakMinutes: 15,
   longBreakEvery: 4,
   standUpMinutes: 3,
+  autoStartNext: false,
 };
 
 function phaseDurationSec(phase: FocusPhase, config: FocusTimerConfig): number {
@@ -74,6 +75,9 @@ function nextPhase(state: FocusTimerState, config: FocusTimerConfig, nowMs: numb
     };
   }
 
+  if ((state.phase === 'shortBreak' || state.phase === 'longBreak') && !config.autoStartNext) {
+    return { ...state, status: 'completed', remainingSec: 0, startedAtMs: undefined };
+  }
   const totalSec = phaseDurationSec('focus', config);
   return {
     ...state,

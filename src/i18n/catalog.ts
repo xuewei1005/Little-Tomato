@@ -78,8 +78,10 @@ const zhCN = {
   'settings.holidayHint': '在元旦、国庆等节日当天给你一句问候',
   'settings.animation': '动画陪伴',
   'settings.animationHint': '让小番茄呼吸、眨眼、伸懒腰',
-  'settings.sound': '声音提醒',
-  'settings.soundHint': '使用柔和的提示音，不会突然吓到你',
+  'settings.sound': '全部音效',
+  'settings.soundHint': '关闭后所有音效静音，文字提醒和动画不受影响',
+  'settings.autoStartNext': '休息后自动开始下一轮',
+  'settings.autoStartNextHint': '关闭时，休息结束后需要手动开始下一轮',
   'settings.quietHours': '勿扰时段',
   'settings.quietHoursHint': '安静时间里不弹出 Todo、起身或节日提醒',
   'settings.quietStart': '开始',
@@ -313,6 +315,7 @@ const ar: PartialCatalog = {
 const supplementalCatalogs: Record<AppLanguage, PartialCatalog> = {
   'zh-CN': {},
   en: {
+    'settings.sound': 'All sounds', 'settings.soundHint': 'Mute all sounds without disabling reminders or animation', 'settings.autoStartNext': 'Automatically start the next round after a break', 'settings.autoStartNextHint': 'When off, start the next round manually after a break',
     'window.minimize': 'Minimize', 'window.maximize': 'Maximize or restore', 'window.close': 'Close window',
     'common.editLabel': 'Edit {label}', 'common.editHint': 'Click to edit {label}',
     'group.deleteAction': 'Delete',
@@ -325,6 +328,7 @@ const supplementalCatalogs: Record<AppLanguage, PartialCatalog> = {
     'task.repeatDaily': 'Daily', 'task.repeatWeekly': 'Weekly', 'task.repeatMonthly': 'Monthly', 'task.repeatYearly': 'Yearly',
   },
   ja: {
+    'settings.sound': 'すべての効果音', 'settings.soundHint': 'オフにすると効果音のみ消音します', 'settings.autoStartNext': '休憩後に次のラウンドを自動開始', 'settings.autoStartNextHint': 'オフの場合は手動で開始します',
     'window.minimize': '最小化', 'window.maximize': '最大化または元に戻す', 'window.close': 'ウィンドウを閉じる',
     'common.editLabel': '{label}を変更', 'common.editHint': 'クリックして{label}を変更',
     'group.deleteAction': '削除',
@@ -337,6 +341,7 @@ const supplementalCatalogs: Record<AppLanguage, PartialCatalog> = {
     'task.repeatDaily': '毎日', 'task.repeatWeekly': '毎週', 'task.repeatMonthly': '毎月', 'task.repeatYearly': '毎年',
   },
   ko: {
+    'settings.sound': '모든 효과음', 'settings.soundHint': '끄면 효과음만 음소거됩니다', 'settings.autoStartNext': '휴식 후 다음 라운드 자동 시작', 'settings.autoStartNextHint': '끄면 다음 라운드를 직접 시작합니다',
     'window.minimize': '최소화', 'window.maximize': '최대화 또는 복원', 'window.close': '창 닫기',
     'common.editLabel': '{label} 수정', 'common.editHint': '클릭해서 {label} 수정',
     'group.deleteAction': '삭제',
@@ -349,6 +354,7 @@ const supplementalCatalogs: Record<AppLanguage, PartialCatalog> = {
     'task.repeatDaily': '매일', 'task.repeatWeekly': '매주', 'task.repeatMonthly': '매월', 'task.repeatYearly': '매년',
   },
   ar: {
+    'settings.sound': 'كل المؤثرات الصوتية', 'settings.soundHint': 'إيقاف الأصوات لا يوقف التذكيرات أو الرسوم', 'settings.autoStartNext': 'بدء الجولة التالية تلقائيًا بعد الاستراحة', 'settings.autoStartNextHint': 'عند الإيقاف، ابدأ الجولة التالية يدويًا',
     'window.minimize': 'تصغير', 'window.maximize': 'تكبير أو استعادة', 'window.close': 'إغلاق النافذة',
     'common.editLabel': 'تعديل {label}', 'common.editHint': 'انقر لتعديل {label}',
     'group.deleteAction': 'حذف',

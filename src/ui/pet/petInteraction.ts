@@ -4,6 +4,21 @@ import { translate } from '../../i18n/catalog';
 
 export const PET_ACTION_EVENT = 'pet-play-action';
 
+export interface PetHitRegion {
+  rect: { left: number; top: number; width: number; height: number };
+  shape: 'ellipse' | 'rectangle';
+}
+
+export function pointInPetRegion(x: number, y: number, regions: PetHitRegion[]): boolean {
+  return regions.some(({ rect, shape }) => {
+    if (rect.width <= 0 || rect.height <= 0) return false;
+    const dx = (x - rect.left) / rect.width;
+    const dy = (y - rect.top) / rect.height;
+    if (shape === 'rectangle') return dx >= 0 && dx <= 1 && dy >= 0 && dy <= 1;
+    return ((dx - 0.5) / 0.5) ** 2 + ((dy - 0.5) / 0.5) ** 2 <= 1;
+  });
+}
+
 const REACTIONS: Array<{ state: PetVisualState; message: string }> = [
   // 摸摸头
   { state: 'happy', message: '嘿嘿，叶子都开心得翘起来啦！' },

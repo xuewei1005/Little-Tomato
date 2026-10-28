@@ -53,7 +53,7 @@ describe('FocusDurationSettings', () => {
     fireEvent.change(screen.getByRole('spinbutton', { name: '长休息间隔（轮）' }), { target: { value: '3' } });
     fireEvent.click(screen.getByRole('button', { name: '保存时长' }));
 
-    expect(saved).toEqual({ focusMinutes: 37, shortBreakMinutes: 7, longBreakMinutes: 19, longBreakEvery: 3, standUpMinutes: 6 });
+    expect(saved).toEqual({ focusMinutes: 37, shortBreakMinutes: 7, longBreakMinutes: 19, longBreakEvery: 3, standUpMinutes: 6, autoStartNext: false });
     expect(screen.getByRole('status')).toHaveTextContent(/本轮.*不变.*下一轮/);
   });
 
@@ -148,6 +148,7 @@ describe('focus duration integration', () => {
     fireEvent.click(screen.getByRole('button', { name: '我站起来了' }));
     expect(screen.getByText('03:00')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '跳过' }));
+    fireEvent.click(screen.getByRole('button', { name: '开始专注' }));
     expect(screen.getByText('45:00')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '跳过' }));
     fireEvent.click(screen.getByRole('button', { name: '我站起来了' }));
